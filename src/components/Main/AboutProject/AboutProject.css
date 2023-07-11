@@ -1,0 +1,163 @@
+.about {
+  padding: 110px 70px;
+}
+
+.about__header {
+    margin: 0;
+    width: 100%;
+    padding-bottom: 23px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    border-bottom: solid 1px #dadada;
+}
+
+.about__list {
+  margin: 0;
+  padding: 70px 0 0 0;
+  column-count: 2;
+  gap: 40px;
+  list-style: none;
+}
+
+.about__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.8px;
+}
+
+.about__text {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.about__timing {
+  width: 100%;
+  padding-top: 110px;
+  display: flex;
+}
+
+.about__week {
+  text-align: center;
+}
+
+.about__week_left {
+  flex-basis: 228px;
+}
+
+.about__week_right {
+  flex-grow: 1;
+  flex-basis: calc(100%-228px);
+}
+
+.about__week-lasts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.about__week-lasts_left {
+  color: #000;
+  background-color: #3ddc84;
+}
+
+.about__week-lasts_right {
+  color: #fff;
+  background-color: #303030;
+}
+
+.about__week-title {
+  display: block;
+  margin-top: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8b8b8b;
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    padding: 90px 50px;
+  }
+
+  .about__list {
+    gap: 30px;
+  }
+
+  .about__text {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about__timing {
+    padding-top: 93px;
+  }
+
+  .about__week_left {
+    flex-basis: 140px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__header {
+    padding-bottom: 28px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about__list {
+    padding: 4px 0 0 0;
+    column-count: 1;
+  }
+
+  .about__title {
+    padding-top: 56px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about__text {
+    padding-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__timing {
+    padding-top: 60px;
+  }
+
+  .about__week_left {
+    flex-basis: 100px;
+  }
+
+  .about__week_right {
+    flex-basis: calc(100%-100px);
+  }
+
+  .about__week-lasts {
+    height: 35px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__week-title {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

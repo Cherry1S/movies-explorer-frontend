@@ -1,0 +1,109 @@
+.card {
+  max-width: 320px;
+  border-radius: 10px;
+  position: relative;
+  background-color: #222;
+  filter: drop-shadow(0px 16px 2px rgba(0, 0, 0, 0.05));
+}
+
+.card__img {
+  width: 100%;
+  max-height: 150px;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.8s ease-in-out;
+}
+
+.card__container {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card__title {
+  margin: 0;
+  max-width: 200px;
+  font-size: 13px;
+  line-height: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__duration {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #8b8b8b;
+  flex-shrink: 0;
+}
+
+.card__savebutton {
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 16px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: ease .5s;
+}
+
+.card__savebutton_active {
+  background-color: #2be080;
+}
+
+.card__deletebutton {
+  width: 16px;
+  height: 16px;
+  background: url("../../../images/button_delete.svg") no-repeat center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .2s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    max-width: 340px;
+    max-height: 257px;
+  }
+
+  .card__img {
+    max-height: 190px;
+  }
+
+  .card__duration {
+    padding: 3px 4px;
+    font-size: 11px;
+    line-height: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    max-width: 300px;
+    max-height: 235px;
+  }
+
+  .card__img {
+    height: 168px;
+  }
+
+  .card__title {
+    max-width: 240px;
+    font-size: 12px;
+  }
+}
