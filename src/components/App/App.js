@@ -13,7 +13,7 @@ import NotFound from "../NotFound/NotFound";
 function App() {
   const [cards, setCards] = useState(cardList);
   const [savedCards, setSavedCards] = useState(savedCardList);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleCardDelete(card) {
     setSavedCards((state) => state.filter((c) => c.movieId !== card.movieId));

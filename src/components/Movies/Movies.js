@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { cardList } from "../../utils/constants";
 import Header from "../Header/Header";
 import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
@@ -25,8 +24,6 @@ function Movies({ cardList }) {
       .catch((err) => { console.error(err); })
       .finally(() => { setIsLoading(false); });
   }, []);
-
-  console.log('s')
 
   return (
     <>

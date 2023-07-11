@@ -1,5 +1,6 @@
 .card {
   max-width: 320px;
+  height: 218px;
   border-radius: 10px;
   position: relative;
   background-color: #222;
@@ -78,7 +79,7 @@
 @media screen and (max-width: 768px) {
   .card {
     max-width: 340px;
-    max-height: 257px;
+    height: 257px;
   }
 
   .card__img {

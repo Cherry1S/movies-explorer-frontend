@@ -60,7 +60,7 @@
 }
 
 .auth__input:focus {
-  outline: none;
+  outline: 2px solid #8b8b8b;
 }
 
 .auth__input_error {

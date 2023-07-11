@@ -50,7 +50,7 @@
 
 .profile__input:focus {
   text-align: left;
-  outline: none;
+  outline: 2px solid #8b8b8b;
 }
 
 .profile__input::placeholder {
