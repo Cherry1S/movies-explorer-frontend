@@ -3,15 +3,23 @@ import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 
-function AuthForm({ typeForm, title, buttonSubmitText }) {
-  const { handleChange, errors, isValid } = useFormAndValidation()
+function AuthForm({ title, buttonSubmitText, onSubmit }) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation()
   const location = useLocation()
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      onSubmit(values.email, values.password, values.name);
+      resetForm();
+    }
+  }
 
   return (
     <section className="auth">
       <Link to="/"><img src={logo_header} alt="логотип" className="auth-logo" /></Link>
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form" name={typeForm} noValidate>
+      <form onSubmit={handleSubmit} className="auth__form" noValidate >
         <div>
           {location.pathname === '/signup' && (
             <>
@@ -30,7 +38,12 @@ function AuthForm({ typeForm, title, buttonSubmitText }) {
             <span className="auth__error">{errors.password}</span>
           </label>
         </div>
-        <button className={`auth__submit ${location.pathname === "/signup" ? "auth__submit_type_register" : ""} ${!isValid && "auth__submit_disabled"}`} disabled={!isValid} type="submit">{buttonSubmitText}</button>
+        <button
+          className={`auth__submit ${!isValid && "auth__submit_disabled"}`}
+          disabled={!isValid}
+          type="submit">
+          {buttonSubmitText}
+        </button>
       </form>
     </section>
   );

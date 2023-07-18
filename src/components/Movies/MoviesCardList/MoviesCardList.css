@@ -6,12 +6,19 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 270px);
+  grid-template-columns: repeat(auto-fit, minmax(270px, max-content));
   justify-content: center;
   align-items: center;
   column-gap: 20px;
   row-gap: 32px;
   list-style: none;
+}
+
+.cards__notfound {
+  margin: 0;
+  padding: 0;
+  color: #4e4e4e;
+  text-align: center;
 }
 
 .cards__block-more {
@@ -48,7 +55,6 @@
     margin: 0;
     padding: 0;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(1fr, 339px));
     column-gap: 30px;
     row-gap: 36px;
   }

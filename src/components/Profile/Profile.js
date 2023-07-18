@@ -1,33 +1,54 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import Header from "../Header/Header";
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 import { AppContext } from '../../contexts/AppContext.js';
 
-function Profile() {
-  const { values, handleChange } = useFormAndValidation()
+function Profile({ onLogout, onSubmit }) {
+  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation()
   const context = useContext(AppContext);
+
+  useEffect(() => {
+    resetForm();
+    setValues({
+      name: context.currentUser.name,
+      email: context.currentUser.email
+    });
+  }, [context.currentUser]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      onSubmit(values.name, values.email)
+    }
+  }
 
   return (
     <>
       <Header />
       <main className="main">
         <section className="profile">
-          <h1 className="profile__title">Привет, Виталий!</h1>
-          <form id="profile__form" className="profile__form">
+          <h1 className="profile__title">Привет, {context.currentUser.name}!</h1>
+          <form onSubmit={handleSubmit} className="profile__form" noValidate>
             <label className="profile__field">
               <span className="profile__span">Имя</span>
-              <input value={values.name || 'Виталий'} onChange={handleChange} type="text" name="name" id="profile-input-name" className="profile__input" placeholder="Имя" minLength={2} maxLength={30} required={true} />
+              <input value={values.name || ``} onChange={handleChange} type="text" name="name" id="profile-input-name" className="profile__input" placeholder="Имя" minLength={2} maxLength={30} required={true} />
+              <span className="profile__error">{errors.name}</span>
             </label>
             <label className="profile__field">
               <span className="profile__span">E-mail</span>
-              <input value={values.email || 'pochta@yandex.ru'} onChange={handleChange} type="email" name="email" id="profile-input-email" className="profile__input" placeholder="Почта" required={true} />
+              <input value={values.email || ``} onChange={handleChange} type="email" name="email" id="profile-input-email" className="profile__input" placeholder="Почта" required={true} />
+              <span className="profile__error">{errors.email}</span>
             </label>
+            <div className="profile__links">
+              <button
+                type="submit"
+                className={`profile__link profile__link_type_edit ${!isValid && "profile__link_disabled"}`}
+                disabled={!isValid}>
+                Редактировать
+              </button>
+              <button type="button" onMouseDown={onLogout} className="profile__link profile__link_type_exit">Выйти из аккаунта</button>
+            </div>
           </form>
-          <div className="profile__links">
-            <Link to="/profile" className="profile__link profile__link_type_edit">Редактировать</Link>
-            <Link to="/signin" className="profile__link profile__link_type_exit">Выйти из аккаунта</Link>
-          </div>
         </section>
       </main>
     </>
