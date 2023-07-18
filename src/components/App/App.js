@@ -70,7 +70,15 @@ function App() {
           navigate('/movies', { replace: true });
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        setTooltipTitle('Что-то пошло не так');
+        setIsOk(false);
+        setIsOpen(true);
+        console.log(err)
+        if (err === 401) {
+          setTooltipTitle('Неверные почта или пароль');
+        }
+      });
   }
 
   function handleRegisterSubmit(email, password, name) {
@@ -79,7 +87,13 @@ function App() {
         navigate('/signin', { replace: true })
       })
       .catch((err) => {
+        setTooltipTitle('Что-то пошло не так');
+        setIsOk(false);
+        setIsOpen(true);
         console.log(err)
+        if (err === 409) {
+          setTooltipTitle('Пользователь с такой почтой уже существует');
+        }
       })
   }
 
@@ -101,8 +115,6 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem('jwt');
-    localStorage.removeItem('filteredCards');
-    localStorage.removeItem('searchValue');
     setIsLoggedIn(false);
     navigate('/');
   }
