@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import ShortsSwitch from "../ShortsSwitch/ShortsSwitch";
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation.js'
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, isLoading }) {
   const { values, handleChange, errors, isValid, setIsValid, setValues } = useFormAndValidation()
   const [isShortsChecked, setIsShortsChecked] = useState(false);
   const location = useLocation();
@@ -44,12 +44,19 @@ function SearchForm({ onSubmit }) {
     <section>
       <form className="form-search" onSubmit={handleSubmit} noValidate>
         <label className="form-search__wrapper">
-          <input value={values.search || ''} type="text" placeholder="Фильм" name="search" className="form-search__input" onChange={handleChange} required />
+          <input
+            value={values.search || ''}
+            type="text"
+            placeholder="Фильм" name="search"
+            className="form-search__input"
+            onChange={handleChange}
+            disabled={isLoading}
+            required />
           <span className="form-search__error">{errors.search ? "Нужно ввести ключевое слово" : ""}</span>
           <button
             type="submit"
-            className={`form-search__submit ${!isValid && "form-search__submit_disabled"}`}
-            disabled={!isValid}>
+            className={`form-search__submit ${(!isValid || isLoading) && "form-search__submit_disabled"}`}
+            disabled={!isValid || isLoading}>
             Найти
           </button>
         </label>

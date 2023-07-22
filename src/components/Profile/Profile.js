@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 import { AppContext } from '../../contexts/AppContext.js';
 
-function Profile({ onLogout, onSubmit }) {
+function Profile({ onLogout, onSubmit, isLoading }) {
   const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation()
   const context = useContext(AppContext);
 
@@ -31,19 +31,39 @@ function Profile({ onLogout, onSubmit }) {
           <form onSubmit={handleSubmit} className="profile__form" noValidate>
             <label className="profile__field">
               <span className="profile__span">Имя</span>
-              <input value={values.name || ``} onChange={handleChange} type="text" name="name" id="profile-input-name" className="profile__input" placeholder="Имя" minLength={2} maxLength={30} required={true} />
+              <input
+                value={values.name || ``}
+                onChange={handleChange}
+                type="text"
+                name="name"
+                id="profile-input-name"
+                className="profile__input"
+                placeholder="Имя"
+                minLength={2}
+                maxLength={30}
+                disabled={isLoading}
+                required={true} />
               <span className="profile__error">{errors.name}</span>
             </label>
             <label className="profile__field">
               <span className="profile__span">E-mail</span>
-              <input value={values.email || ``} onChange={handleChange} type="email" name="email" id="profile-input-email" className="profile__input" placeholder="Почта" required={true} />
+              <input
+                value={values.email || ``}
+                onChange={handleChange}
+                type="email"
+                name="email"
+                id="profile-input-email"
+                className="profile__input"
+                placeholder="Почта"
+                disabled={isLoading}
+                required={true} />
               <span className="profile__error">{errors.email}</span>
             </label>
             <div className="profile__links">
               <button
                 type="submit"
-                className={`profile__link profile__link_type_edit ${(!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email)) && "profile__link_disabled"}`}
-                disabled={!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email)}>
+                className={`profile__link profile__link_type_edit ${(!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading) && "profile__link_disabled"}`}
+                disabled={!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading}>
                 Редактировать
               </button>
               <button type="button" onMouseDown={onLogout} className="profile__link profile__link_type_exit">Выйти из аккаунта</button>

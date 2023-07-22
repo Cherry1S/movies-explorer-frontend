@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 
-function AuthForm({ title, buttonSubmitText, onSubmit }) {
+function AuthForm({ title, buttonSubmitText, onSubmit, isLoading }) {
   const { values, handleChange, errors, isValid, isEmailValid } = useFormAndValidation()
   const location = useLocation()
 
@@ -23,23 +23,48 @@ function AuthForm({ title, buttonSubmitText, onSubmit }) {
           {location.pathname === '/signup' && (
             <>
               <label className="auth__field">Имя
-                <input type="text" onChange={handleChange} className={`auth__input ${errors.name && "auth__input_error"}`} name="name" placeholder="Введите ваше имя" required />
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  className={`auth__input ${errors.name && "auth__input_error"}`}
+                  name="name"
+                  placeholder="Введите ваше имя"
+                  disabled={isLoading}
+                  required />
                 <span className="auth__error">{errors.name}</span>
               </label>
             </>
           )}
           <label className="auth__field">E-mail
-            <input type="email" onChange={handleChange} className={`auth__input ${!isEmailValid && "auth__input_error"}`} name="email" placeholder="Введите Email" minLength={2} maxLength={40} required={true} />
+            <input
+              type="email"
+              onChange={handleChange}
+              className={`auth__input ${!isEmailValid && "auth__input_error"}`}
+              name="email"
+              placeholder="Введите Email"
+              minLength={2}
+              maxLength={40}
+              disabled={isLoading}
+              required={true} />
             <span className="auth__error">{!isEmailValid ? 'Неверно указана почта.' : ''}</span>
           </label>
           <label className="auth__field">Пароль
-            <input type="password" onChange={handleChange} className={`auth__input ${errors.password && "auth__input_error"}`} name="password" placeholder="Введите Пароль" minLength={2} maxLength={40} required={true} />
+            <input
+              type="password"
+              onChange={handleChange}
+              className={`auth__input ${errors.password && "auth__input_error"}`}
+              name="password"
+              placeholder="Введите Пароль"
+              minLength={2}
+              maxLength={40}
+              disabled={!isValid || !isEmailValid || isLoading}
+              required={true} />
             <span className="auth__error">{errors.password}</span>
           </label>
         </div>
         <button
-          className={`auth__submit ${(!isValid || !isEmailValid) && "auth__submit_disabled"}`}
-          disabled={!isValid || !isEmailValid}
+          className={`auth__submit ${(!isValid || !isEmailValid || isLoading) && "auth__submit_disabled"}`}
+          disabled={!isValid || !isEmailValid || isLoading}
           type="submit">
           {buttonSubmitText}
         </button>

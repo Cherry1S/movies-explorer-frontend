@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import MoviesCard from "../MoviesCard/MoviesCard.js";
 import useWindowSize from '../../../hooks/useWindowSize.js';
+import { MOVIES_CARDS } from "../../../utils/constants.js";
 
 function MoviesCardList({ cardList, savedCardList, onCardDelete, onCardSave }) {
-  console.log(cardList)
   const [buttonVisibility, setButtonVisibility] = useState(true);
-  const [visibleCount, setVisibleCount] = useState(16);
-  const [counter, setCounter] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(MOVIES_CARDS.DEFAULT_COUNT);
+  const [counter, setCounter] = useState(MOVIES_CARDS.DEFAULT_COUNTER);
   const size = useWindowSize(); //хук проверки размера окна
   const location = useLocation();
 
@@ -31,13 +31,13 @@ function MoviesCardList({ cardList, savedCardList, onCardDelete, onCardSave }) {
   }, [cardList]);
 
   useEffect(() => {  //выставляем количество отображаемых фильмов при низком разрешении
-    if (size.width <= 1000) {
-      setVisibleCount(8);
-      setCounter(2);
+    if (size.width <= MOVIES_CARDS.WIDTH1) {
+      setVisibleCount(MOVIES_CARDS.WIDTH1_COUNT);
+      setCounter(MOVIES_CARDS.WIDTH1_COUNTER);
     }
-    if (size.width <= 630) {
-      setVisibleCount(5);
-      setCounter(2);
+    if (size.width <= MOVIES_CARDS.WIDTH2) {
+      setVisibleCount(MOVIES_CARDS.WIDTH2_COUNT);
+      setCounter(MOVIES_CARDS.WIDTH2_COUNTER);
     }
   }, [size.width]);
 

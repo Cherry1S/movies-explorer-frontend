@@ -1,7 +1,8 @@
-export const filterSearch = (cards, searchValue, isShorts, callback, localValues) => {
+import { MOVIES_SHORTS_DURATION } from "./constants.js"
 
+export const filterSearch = (cards, searchValue, isShorts, callback, localValues) => {
   const filteredByWord = cards.filter(item => item.nameRU.toLowerCase().includes(searchValue.toLowerCase()))
-  const filteredByDuration = filteredByWord.filter(item => item.duration <= 40)
+  const filteredByDuration = filteredByWord.filter(item => item.duration <= MOVIES_SHORTS_DURATION)
 
   const saveInLocalStorage = (filteredCards) => {
     if (localValues) {

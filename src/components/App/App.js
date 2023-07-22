@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate, Route, Routes, Link } from "react-router-dom";
+import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 import { AppContext } from '../../contexts/AppContext.js';
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import MoviesApi from '../../utils/MoviesApi.js';
@@ -13,6 +13,8 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import NotFound from "../NotFound/NotFound";
+import { ERRORS } from '../../utils/constants.js';
+
 
 function App() {
   const [filteredCards, setFilteredCards] = useState([]);
@@ -65,6 +67,7 @@ function App() {
 
 
   function handleLoginSubmit(email, password) {
+    setIsLoading(true)
     mainApi.authorize(email, password)
       .then((data) => {
         if (data.token) {
@@ -77,13 +80,17 @@ function App() {
         setIsOk(false);
         setIsOpen(true);
         console.log(err)
-        if (err === 401) {
+        if (err === ERRORS.UNAUTHORIZED) {
           setTooltipTitle('Неверные почта или пароль');
         }
-      });
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   function handleRegisterSubmit(email, password, name) {
+    setIsLoading(true)
     mainApi.register(email, password, name)
       .then(() => {
         handleLoginSubmit(email, password);
@@ -93,13 +100,17 @@ function App() {
         setIsOk(false);
         setIsOpen(true);
         console.log(err)
-        if (err === 409) {
+        if (err === ERRORS.CONFLICT) {
           setTooltipTitle('Пользователь с такой почтой уже существует');
         }
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
   function handleUpdateUser(newName, newEmail) {
+    setIsLoading(true)
     mainApi.changeUserInfo(newName, newEmail)
       .then((newUserInfo) => {
         setCurrentUser(newUserInfo);
@@ -112,6 +123,12 @@ function App() {
         setIsOk(false);
         setIsOpen(true);
         console.log(err);
+        if (err === ERRORS.CONFLICT) {
+          setTooltipTitle('Пользователь с такой почтой уже существует');
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
@@ -179,9 +196,10 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/signup" element={!isLoggedIn ? <Register onSubmit={handleRegisterSubmit} /> : <Navigate to="/movies" replace />} />
-            <Route path="/signin" element={!isLoggedIn ? <Login onSubmit={handleLoginSubmit} /> : <Navigate to="/movies" replace />} />
+            <Route path="/signup" element={!isLoggedIn ? <Register onSubmit={handleRegisterSubmit} isLoading={isLoading} /> : <Navigate to="/movies" replace />} />
+            <Route path="/signin" element={!isLoggedIn ? <Login onSubmit={handleLoginSubmit} isLoading={isLoading} /> : <Navigate to="/movies" replace />} />
             <Route path="/profile" element={<ProtectedRoute element={Profile}
+              isLoading={isLoading}
               onLogout={handleLogout}
               onSubmit={handleUpdateUser} />}
             />
