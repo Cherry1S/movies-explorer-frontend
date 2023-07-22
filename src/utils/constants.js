@@ -20,3 +20,7 @@ export const ERRORS = {
   NOT_FOUND: 404,
   CONFLICT: 409,
 }
+
+//API
+export const BASE_URL = 'https://api.cherrymovies.nomoreparties.sbs';
+export const MOVIESAPI_URL = 'https://api.nomoreparties.co';

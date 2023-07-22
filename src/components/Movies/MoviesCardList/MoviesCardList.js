@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
 import MoviesCard from "../MoviesCard/MoviesCard.js";
 import useWindowSize from '../../../hooks/useWindowSize.js';
 import { MOVIES_CARDS } from "../../../utils/constants.js";
@@ -9,7 +8,6 @@ function MoviesCardList({ cardList, savedCardList, onCardDelete, onCardSave }) {
   const [visibleCount, setVisibleCount] = useState(MOVIES_CARDS.DEFAULT_COUNT);
   const [counter, setCounter] = useState(MOVIES_CARDS.DEFAULT_COUNTER);
   const size = useWindowSize(); //хук проверки размера окна
-  const location = useLocation();
 
   const visibleCards = cardList.slice(0, visibleCount);
 
@@ -64,7 +62,7 @@ function MoviesCardList({ cardList, savedCardList, onCardDelete, onCardSave }) {
           <button className="cards__button-more" onClick={handleClickMore}>Ещё</button>
         </div>
       )}
-      {cardList.length === 0 && location.pathname === '/movies' && localStorage.getItem('filteredCards') && (
+      {cardList.length === 0 && localStorage.getItem('filteredCards') && (
         <h2 className="cards__notfound">Ничего не найдено</h2>
       )}
     </section>

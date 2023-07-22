@@ -183,6 +183,7 @@ function App() {
     const deletedCard = savedCards.find((c) => c.movieId === card.id || c.movieId === card.movieId);
     mainApi.deleteMovie(deletedCard);
     setSavedCards((state) => state.filter((c) => c.movieId !== card.id && c.movieId !== card.movieId));
+    setFilteredSavedCards((state) => state.filter((c) => c.movieId !== card.id && c.movieId !== card.movieId));
   }
 
   function handlePopupClose() {

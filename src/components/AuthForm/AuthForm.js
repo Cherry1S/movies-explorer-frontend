@@ -57,7 +57,7 @@ function AuthForm({ title, buttonSubmitText, onSubmit, isLoading }) {
               placeholder="Введите Пароль"
               minLength={2}
               maxLength={40}
-              disabled={!isValid || !isEmailValid || isLoading}
+              disabled={isLoading}
               required={true} />
             <span className="auth__error">{errors.password}</span>
           </label>

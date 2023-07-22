@@ -26,7 +26,7 @@ function MoviesCard({ savedCardList, card, movieId, duration, image, trailerLink
   useEffect(() => {
     const isSaved = savedCardList.some((i) => i.movieId === movieId);
     setIsSaved(isSaved);
-  }, []);
+  }, [ savedCardList ]);
 
   return (
     <li className="card">

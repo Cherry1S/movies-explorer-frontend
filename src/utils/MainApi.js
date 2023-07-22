@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.cherrymovies.nomoreparties.sbs';
-export const MOVIESAPI_URL = 'https://api.nomoreparties.co';
+import { BASE_URL, MOVIESAPI_URL } from "./constants";
 
 function handleResponse(res) {
   if (res.ok) {
