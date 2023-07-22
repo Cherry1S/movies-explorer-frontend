@@ -4,7 +4,7 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 import { AppContext } from '../../contexts/AppContext.js';
 
 function Profile({ onLogout, onSubmit, isLoading }) {
-  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation()
+  const { values, handleChange, errors, isValid, isEmailValid, setValues, resetForm } = useFormAndValidation()
   const context = useContext(AppContext);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function Profile({ onLogout, onSubmit, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && isEmailValid) {
       onSubmit(values.name, values.email)
     }
   }
@@ -57,13 +57,13 @@ function Profile({ onLogout, onSubmit, isLoading }) {
                 placeholder="Почта"
                 disabled={isLoading}
                 required={true} />
-              <span className="profile__error">{errors.email}</span>
+              <span className="profile__error">{!isEmailValid ? 'Неверно указана почта.' : ''}</span>
             </label>
             <div className="profile__links">
               <button
                 type="submit"
-                className={`profile__link profile__link_type_edit ${(!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading) && "profile__link_disabled"}`}
-                disabled={!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading}>
+                className={`profile__link profile__link_type_edit ${(!isValid || !isEmailValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading) && "profile__link_disabled"}`}
+                disabled={!isValid || !isEmailValid || (values.name === context.currentUser.name && values.email === context.currentUser.email) || isLoading}>
                 Редактировать
               </button>
               <button type="button" onMouseDown={onLogout} className="profile__link profile__link_type_exit">Выйти из аккаунта</button>
