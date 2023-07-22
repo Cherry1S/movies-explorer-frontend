@@ -5,13 +5,13 @@ import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
-function SavedMovies({ savedCardList, onCardDelete, onCardSave, isLoading, onSubmit }) {
+function SavedMovies({ cardList, savedCardList, onCardDelete, onCardSave, isLoading, onSubmit }) {
   return (
     <>
       <Header />
       <main className="main">
         <SearchForm onSubmit={onSubmit} />
-        {isLoading ? (<Preloader />) : (<MoviesCardList cardList={savedCardList} savedCardList={savedCardList} onCardDelete={onCardDelete} onCardSave={onCardSave} />)}
+        {isLoading ? (<Preloader />) : (<MoviesCardList cardList={cardList} savedCardList={savedCardList} onCardDelete={onCardDelete} onCardSave={onCardSave} />)}
       </main>
       <Footer />
     </>

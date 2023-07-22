@@ -4,6 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard.js";
 import useWindowSize from '../../../hooks/useWindowSize.js';
 
 function MoviesCardList({ cardList, savedCardList, onCardDelete, onCardSave }) {
+  console.log(cardList)
   const [buttonVisibility, setButtonVisibility] = useState(true);
   const [visibleCount, setVisibleCount] = useState(16);
   const [counter, setCounter] = useState(4);

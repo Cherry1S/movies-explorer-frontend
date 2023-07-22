@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
+import { Navigate, useNavigate, Route, Routes, Link } from "react-router-dom";
 import { AppContext } from '../../contexts/AppContext.js';
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import MoviesApi from '../../utils/MoviesApi.js';
@@ -16,6 +16,7 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [filteredCards, setFilteredCards] = useState([]);
+  const [filteredSavedCards, setFilteredSavedCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -46,9 +47,6 @@ function App() {
 
   useEffect(() => {
     setFilteredCards([])
-    if (localStorage.getItem('filteredCards')) {
-      setFilteredCards(JSON.parse(localStorage.getItem('filteredCards')))
-    }
     Promise.all([
       mainApi.getUser(),
       mainApi.getSavedMovies()
@@ -56,6 +54,9 @@ function App() {
       .then((pageData) => {
         setCurrentUser(pageData[0]);
         setSavedCards(pageData[1]);
+        if (localStorage.getItem('filteredCards')) {
+          setFilteredCards(JSON.parse(localStorage.getItem('filteredCards')))
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -140,15 +141,15 @@ function App() {
   function handleSavedSearchSubmit(searchValue = '', isShorts) {
     setIsLoading(true)
     mainApi.getSavedMovies()
-    .then((cards) => {
-      filterSearch(cards, searchValue, isShorts, setSavedCards)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setIsLoading(false)
-    })
+      .then((cards) => {
+        filterSearch(cards, searchValue, isShorts, setFilteredSavedCards)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   function handleSaveCard(card) {
@@ -178,8 +179,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/signup" element={<Register onSubmit={handleRegisterSubmit} />} />
-            <Route path="/signin" element={<Login onSubmit={handleLoginSubmit} />} />
+            <Route path="/signup" element={!isLoggedIn ? <Register onSubmit={handleRegisterSubmit} /> : <Navigate to="/movies" replace />} />
+            <Route path="/signin" element={!isLoggedIn ? <Login onSubmit={handleLoginSubmit} /> : <Navigate to="/movies" replace />} />
             <Route path="/profile" element={<ProtectedRoute element={Profile}
               onLogout={handleLogout}
               onSubmit={handleUpdateUser} />}
@@ -194,6 +195,7 @@ function App() {
             />
             <Route path="/saved-movies" element={<ProtectedRoute element={SavedMovies}
               savedCardList={savedCards}
+              cardList={filteredSavedCards}
               isLoading={isLoading}
               onCardSave={handleSaveCard}
               onSubmit={handleSavedSearchSubmit}
@@ -203,11 +205,11 @@ function App() {
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
           <InfoToolTip
-              isOpen={isOpen}
-              onClose={handlePopupClose}
-              isOk={isOk}
-              tooltipTitle={tooltipTitle}
-            />
+            isOpen={isOpen}
+            onClose={handlePopupClose}
+            isOk={isOk}
+            tooltipTitle={tooltipTitle}
+          />
         </div>
       </div>
     </AppContext.Provider >
