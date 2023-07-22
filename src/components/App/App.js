@@ -45,6 +45,7 @@ function App() {
   }
 
   useEffect(() => {
+    setFilteredCards([])
     if (localStorage.getItem('filteredCards')) {
       setFilteredCards(JSON.parse(localStorage.getItem('filteredCards')))
     }
@@ -115,6 +116,9 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('filteredCards');
+    localStorage.removeItem('searchValue');
+    localStorage.removeItem('isShorts');
     setIsLoggedIn(false);
     navigate('/');
   }
@@ -123,7 +127,7 @@ function App() {
     setIsLoading(true)
     MoviesApi.getInitialCards()
       .then((cards) => {
-        filterSearch(cards, searchValue, isShorts, setFilteredCards, { searchValue: 'searchValue', filteredCards: 'filteredCards' })
+        filterSearch(cards, searchValue, isShorts, setFilteredCards, { filteredCards: 'filteredCards' })
       })
       .catch((err) => {
         console.log(err)
@@ -133,8 +137,18 @@ function App() {
       })
   }
 
-  function handleSavedSearchSubmit(searchValue, isShorts) {
-    filterSearch(savedCards, searchValue, isShorts, setSavedCards)
+  function handleSavedSearchSubmit(searchValue = '', isShorts) {
+    setIsLoading(true)
+    mainApi.getSavedMovies()
+    .then((cards) => {
+      filterSearch(cards, searchValue, isShorts, setSavedCards)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    })
   }
 
   function handleSaveCard(card) {

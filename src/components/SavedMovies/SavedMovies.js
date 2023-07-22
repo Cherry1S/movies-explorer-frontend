@@ -11,7 +11,7 @@ function SavedMovies({ savedCardList, onCardDelete, onCardSave, isLoading, onSub
       <Header />
       <main className="main">
         <SearchForm onSubmit={onSubmit} />
-        {isLoading ? (<Preloader />) : (<MoviesCardList cardList={savedCardList} savedCardList={savedCardList} onCardDelete={onCardDelete} onCardSave={onCardSave}/>)}
+        {isLoading ? (<Preloader />) : (<MoviesCardList cardList={savedCardList} savedCardList={savedCardList} onCardDelete={onCardDelete} onCardSave={onCardSave} />)}
       </main>
       <Footer />
     </>

@@ -1,10 +1,10 @@
 export const filterSearch = (cards, searchValue, isShorts, callback, localValues) => {
+
   const filteredByWord = cards.filter(item => item.nameRU.toLowerCase().includes(searchValue.toLowerCase()))
   const filteredByDuration = filteredByWord.filter(item => item.duration <= 40)
 
   const saveInLocalStorage = (filteredCards) => {
     if (localValues) {
-      localStorage.setItem(localValues.searchValue, searchValue);
       localStorage.setItem(localValues.filteredCards, JSON.stringify(filteredCards));
     }
   }

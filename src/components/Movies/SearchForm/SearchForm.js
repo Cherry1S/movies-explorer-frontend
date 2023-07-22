@@ -4,29 +4,40 @@ import ShortsSwitch from "../ShortsSwitch/ShortsSwitch";
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation.js'
 
 function SearchForm({ onSubmit }) {
-  const { values, handleChange, errors, isValid, setValues } = useFormAndValidation()
+  const { values, handleChange, errors, isValid, setIsValid, setValues } = useFormAndValidation()
   const [isShortsChecked, setIsShortsChecked] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/movies')
+    if (location.pathname === '/movies') {
       setIsShortsChecked(JSON.parse(localStorage.getItem('isShorts')))
       setValues({
         search: localStorage.getItem('searchValue')
       });
+      if (localStorage.getItem('searchValue')) {
+        setIsValid(true)
+      }
+    }
+    if (location.pathname === '/saved-movies') {
+      onSubmit(values.search, isShortsChecked)
+    }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (location.pathname === '/movies') {
+      localStorage.setItem('searchValue', values.search);
+    }
     if (isValid) {
       onSubmit(values.search, isShortsChecked)
     }
   }
 
   const handleShortsCheck = () => {
-    localStorage.setItem('isShorts', !isShortsChecked);
+    if (location.pathname === '/movies') {
+      localStorage.setItem('isShorts', !isShortsChecked);
+    }
     setIsShortsChecked(!isShortsChecked);
-    onSubmit(values.search, !isShortsChecked)
   };
 
   return (
