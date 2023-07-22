@@ -42,8 +42,8 @@ function Profile({ onLogout, onSubmit }) {
             <div className="profile__links">
               <button
                 type="submit"
-                className={`profile__link profile__link_type_edit ${!isValid && "profile__link_disabled"}`}
-                disabled={!isValid}>
+                className={`profile__link profile__link_type_edit ${(!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email)) && "profile__link_disabled"}`}
+                disabled={!isValid || (values.name === context.currentUser.name && values.email === context.currentUser.email)}>
                 Редактировать
               </button>
               <button type="button" onMouseDown={onLogout} className="profile__link profile__link_type_exit">Выйти из аккаунта</button>

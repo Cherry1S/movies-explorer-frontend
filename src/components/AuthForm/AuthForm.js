@@ -1,17 +1,16 @@
-import logo_header from "../../images/header_logo.svg";
+import logo_header from "../../images/header_logo.svg"
 import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js'
 
 function AuthForm({ title, buttonSubmitText, onSubmit }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation()
+  const { values, handleChange, errors, isValid, isEmailValid } = useFormAndValidation()
   const location = useLocation()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && isEmailValid) {
       onSubmit(values.email, values.password, values.name);
-      resetForm();
     }
   }
 
@@ -30,8 +29,8 @@ function AuthForm({ title, buttonSubmitText, onSubmit }) {
             </>
           )}
           <label className="auth__field">E-mail
-            <input type="email" onChange={handleChange} className={`auth__input ${errors.email && "auth__input_error"}`} name="email" placeholder="Введите Email" minLength={2} maxLength={40} required={true} />
-            <span className="auth__error">{errors.email}</span>
+            <input type="email" onChange={handleChange} className={`auth__input ${!isEmailValid && "auth__input_error"}`} name="email" placeholder="Введите Email" minLength={2} maxLength={40} required={true} />
+            <span className="auth__error">{!isEmailValid ? 'Неверно указана почта.' : ''}</span>
           </label>
           <label className="auth__field">Пароль
             <input type="password" onChange={handleChange} className={`auth__input ${errors.password && "auth__input_error"}`} name="password" placeholder="Введите Пароль" minLength={2} maxLength={40} required={true} />
@@ -39,8 +38,8 @@ function AuthForm({ title, buttonSubmitText, onSubmit }) {
           </label>
         </div>
         <button
-          className={`auth__submit ${!isValid && "auth__submit_disabled"}`}
-          disabled={!isValid}
+          className={`auth__submit ${(!isValid || !isEmailValid) && "auth__submit_disabled"}`}
+          disabled={!isValid || !isEmailValid}
           type="submit">
           {buttonSubmitText}
         </button>

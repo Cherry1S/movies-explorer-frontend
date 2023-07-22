@@ -85,7 +85,7 @@ function App() {
   function handleRegisterSubmit(email, password, name) {
     mainApi.register(email, password, name)
       .then(() => {
-        navigate('/signin', { replace: true })
+        handleLoginSubmit(email, password);
       })
       .catch((err) => {
         setTooltipTitle('Что-то пошло не так');
@@ -98,8 +98,8 @@ function App() {
       })
   }
 
-  function handleUpdateUser(newName, newDescription) {
-    mainApi.changeUserInfo(newName, newDescription)
+  function handleUpdateUser(newName, newEmail) {
+    mainApi.changeUserInfo(newName, newEmail)
       .then((newUserInfo) => {
         setCurrentUser(newUserInfo);
         setTooltipTitle('Данные успешно изменены');
