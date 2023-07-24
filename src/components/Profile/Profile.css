@@ -20,6 +20,7 @@
 }
 
 .profile__field {
+  position: relative;
   width: 100%;
   padding: 17px 0 16px;
   display: flex;
@@ -46,6 +47,18 @@
   text-align: right;
   background-color: transparent;
   border: 0;
+}
+
+.profile__error {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 35px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+  color: #ee3465;
+  transition: .3s ease-in-out;
 }
 
 .profile__input:focus {
@@ -79,9 +92,19 @@
   transition: all 0.3s ease-in-out;
 }
 
+.profile__link_disabled {
+  cursor: default;
+  opacity: .5;
+}
+
 .profile__link:hover {
-  opacity: 0.7;
+  opacity: .8;
   text-decoration: underline;
+}
+
+.profile__link_disabled:hover {
+  text-decoration: none;
+  opacity: .5;
 }
 
 .profile__link_type_edit {
@@ -110,6 +133,10 @@
   .profile {
     padding: 66px 10px 40px;
     width: 260px;
+  }
+
+  .profile__field {
+    padding: 17px 0 30px;
   }
 
   .profile__form {

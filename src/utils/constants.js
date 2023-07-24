@@ -1,159 +1,26 @@
-export const cardList = [
-  {
-    duration: 6666,
-    image: "https://avatars.dzeninfra.ru/get-zen_doc/920263/pub_5d82966f92414d00c46763c8_5d8296839515ee00ad30e29a/scale_1200",
-    movieId: 1,
-    nameRU: "Человек Пупук",
-    nameEN: "Title",
-  },
-  {
-    duration: 3232,
-    image: "https://thumbs.dfs.ivi.ru/storage5/contents/c/b/3b2454295986b35c9d951a27c0ef52.jpg",
-    movieId: 2,
-    nameRU: "Хоббит",
-    nameEN: "Hobbit",
-  },
-  {
-    duration: 6135,
-    image: "https://metarankings.ru/wp-content/uploads/2021/12/matrica-4-voskreshenie-cover-art.jpg",
-    movieId: 3,
-    nameRU: "Матрица",
-    nameEN: "Matrix",
-  },
-  {
-    duration: 6666,
-    image: "https://cinema.mosfilm.ru/upload/resize_cache/iblock/cca/315_315_0/kse3vw479rdxhcsfvn2jv3reo3tww94h.jpg",
-    movieId: 4,
-    nameRU: "Хитровка",
-    nameEN: "Hitrovka",
-  },
-  {
-    duration: 3333,
-    image: "https://metarankings.ru/images/uploads/bladshot-2020-cover-art.jpg",
-    movieId: 5,
-    nameRU: "Бладшот>",
-    nameEN: "Bloodshot",
-  },
-  {
-    duration: 2222,
-    image: "https://thumbs.dfs.ivi.ru/storage28/contents/9/8/28252fd2c21f9ed09083fa0f8fb086.jpg/234x360/?q=60",
-    movieId: 6,
-    nameRU: "Шерлок Холмс",
-    nameEN: "Sherlock Merlock",
-  },
-  {
-    duration: 6436,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrAxYK4X7B6h4LmVp7q6EshdCpnXOnYllQdQ&usqp=CAU",
-    movieId: 7,
-    nameRU: "Убить билла",
-    nameEN: "kill bill",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAo2nL_fnZFZ2uMD5Q1Z4M8VL8a5hGRCZEhA&usqp=CAU",
-    movieId: 8,
-    nameRU: "На",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://www.film.ru/sites/default/files/styles/thumb_260x400/public/movies/posters/48996022-1152677.jpg",
-    movieId: 9,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbE-YuG4ruO_hrmFisrDxz2GzzacH9G-_DAw&usqp=CAU",
-    movieId: 10,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://mf-static-ssl.more.tv/jackal/2577269/b41e9f10-92c4-4c67-8d1e-9664eb9832e8_W250_H355.webp",
-    movieId: 11,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO0ZTWuINay5RzlAhyE1DB4X0ZYSLMTxITww&usqp=CAU",
-    movieId: 12,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScvhFxftIAXfnalYoyxG15SE8qKTzDo0-_cw&usqp=CAU",
-    movieId: 13,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZ2OA8bbyP9jaaezXyJtxMmBDM6v1ypT17w&usqp=CAU",
-    movieId: 14,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://cdn.trinixy.ru/pics4/20090318/movies_18.jpg",
-    movieId: 15,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://bugaga.ru/uploads/posts/2009-03/1237438748_movies_4.jpg",
-    movieId: 16,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/f6b2f7b0-8a46-4c39-88e3-8d6b1bfb2aa6/960x960",
-    movieId: 17,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9K5VC9fcgbxSUy4GhCOk_0-LJen7oWnqliNt_PPMjIowgP9MrfPejkr0BmzJrtCFXsXY&usqp=CAU",
-    movieId: 18,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-  {
-    duration: 6666,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1e6ckxxgbst-Hn72YyJWJR5qHh4V0w9sQRW0PqJFeVrSNxdsvnYVcyd5vPV2t6cwjP8&usqp=CAU",
-    movieId: 19,
-    nameRU: "Название",
-    nameEN: "Title",
-  },
-];
+//длительность видео в минутах для фильтрации карточек при установленном флажке "Короткометражки"
+export const MOVIES_SHORTS_DURATION = 40;
 
-export const savedCardList = [
-  {
-    duration: 6666,
-    image: "https://avatars.dzeninfra.ru/get-zen_doc/920263/pub_5d82966f92414d00c46763c8_5d8296839515ee00ad30e29a/scale_1200",
-    movieId: 1,
-    nameRU: "Человек Пупук",
-    nameEN: "Title",
-  },
-  {
-    duration: 3232,
-    image: "https://thumbs.dfs.ivi.ru/storage5/contents/c/b/3b2454295986b35c9d951a27c0ef52.jpg",
-    movieId: 2,
-    nameRU: "Хоббит",
-    nameEN: "Hobbit",
-  },
-  {
-    duration: 6666,
-    image: "https://cinema.mosfilm.ru/upload/resize_cache/iblock/cca/315_315_0/kse3vw479rdxhcsfvn2jv3reo3tww94h.jpg",
-    movieId: 4,
-    nameRU: "Хитровка",
-    nameEN: "Hitrovka",
-  },
-];
+//отображаемое количество карточек и разрешение, при котором оно меняется
+export const MOVIES_CARDS = {
+  DEFAULT_COUNT: 16,
+  DEFAULT_COUNTER: 4,
+  WIDTH1: 1000,
+  WIDTH1_COUNT: 8,
+  WIDTH1_COUNTER: 2,
+  WIDTH2: 630,
+  WIDTH2_COUNT: 5,
+  WIDTH2_COUNTER: 2,
+}
+
+//обрабатываемые ошибки
+export const ERRORS = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+}
+
+//API
+export const BASE_URL = 'https://api.cherrymovies.nomoreparties.sbs';
+export const MOVIESAPI_URL = 'https://api.nomoreparties.co';
