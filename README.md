@@ -1,5 +1,6 @@
 # movies-explorer-frontend
 
+Реализована адаптивная верстка, авторизация, работа с API, валидация форм, поиск фильмов и фильтрация по данным с сервера, так же можно сохранить фильмы в свою библиотеку. При клике на обложку фильма открывается вкладка с ссылкой на трейлер фильма в YouTube.
+
 Ссылка на проект: https://cherrymovies.nomoreparties.sbs/
-Ссылка на пул реквест: https://github.com/Cherry1S/movies-explorer-frontend/pull/2
 Ссылка на макет: https://disk.yandex.ru/d/bYiwmvTPTSdHqA
